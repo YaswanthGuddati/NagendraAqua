@@ -1,0 +1,45 @@
+﻿@model List<NagendraAqua.Models.Feed>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Feed types";
+}
+<h2>Feed Management</h2>
+
+<div style="text-align:right; margin-bottom:10px;">
+    @Html.ActionLink(" + Add Feed", "CreateFeed",
+        null, new { @class = "btn btn-success" })
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Feed Id</th>
+            <th>Feed Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FeedId</td>
+                <td>@item.FeedName</td>
+                <td>
+                    <a href="@Url.Action("Edit","Feed", new { id = item.FeedId })" class="btn btn-primary">
+                        Edit
+                    </a>
+
+                    @Html.ActionLink("Delete", "Delete",
+                        new { id = item.FeedId },
+                        new
+                             {
+                            @class = "btn btn-danger btn-sm",
+                            onclick = "return confirm('Delete feed?');"
+                        })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

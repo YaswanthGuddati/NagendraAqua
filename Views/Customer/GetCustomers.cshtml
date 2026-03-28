@@ -1,0 +1,91 @@
+﻿@model System.Data.DataTable
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Customer Orders";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetCustomers</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#searchBox").on("keyup", function () {
+
+                var value = $(this).val().toLowerCase();
+
+                $("#customerTable tbody tr").filter(function () {
+
+                    $(this).toggle(
+                        $(this).text().toLowerCase().indexOf(value) > -1
+                    );
+
+                });
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <h2>Customer Orders</h2>
+
+    <!-- SEARCH BOX -->
+    <input type="text" id="searchBox"
+           placeholder="Search customer..."
+           class="form-control mb-3" />
+
+    <br />
+
+    <table class="table table-bordered table-striped" id="customerTable">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Feed</th>
+                <th>Type</th>
+                <th>Seller</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+                <tr>
+                    <td>@row["CustomerId"]</td>
+                    <td class="custName">@row["CustomerName"]</td>
+                    <td>@row["Address"]</td>
+                    <td>@row["Mobile"]</td>
+                    <td>@row["FeedName"]</td>
+                    <td>@row["CustomerType"]</td>
+                    <td>@row["SellerName"]</td>
+                    <td>@row["Quantity"]</td>
+                    <td>@row["Date"]</td>
+
+                    <td>
+                        
+
+                        @Html.ActionLink("Delete", "Delete",
+                            new { id = row["CustomerId"] },
+                            new
+                            {
+                                @class = "btn btn-danger btn-sm",
+                                onclick = "return confirm('Delete this order?');"
+                            })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

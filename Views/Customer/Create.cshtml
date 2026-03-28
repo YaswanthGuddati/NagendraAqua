@@ -1,0 +1,254 @@
+﻿@model NagendraAqua.Models.Customer
+@{
+    Layout = null;   // No layout (as required)
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Customer Order - NIT AQUA Foods</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .custom-navbar {
+            background-color: #2b4378;
+            padding: 10px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 400;
+        }
+
+        .admin-login-btn {
+            background-color: #ff9800;
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* ===== ORDER FORM ===== */
+        .order-container {
+            padding: 60px 10%;
+        }
+
+        .order-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background: linear-gradient(90deg, #0b1d3a, #142850);
+            color: white;
+            /* Reduced top/bottom padding significantly */
+            padding: 20px 0 10px;
+            margin-top: 0;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Keeps columns aligned at the top */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-col {
+            width: 23%;
+            /* Remove unnecessary padding that pushes height down */
+            padding: 0;
+        }
+
+        /* Make the logo and title tighter */
+        .footer-logo {
+            width: 50px; /* Slightly smaller logo */
+            margin-bottom: 5px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 8px; /* Less space under headings */
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .footer-col p, .footer-col a {
+            margin-bottom: 2px; /* Tighter line spacing for text */
+            font-size: 12px;
+        }
+
+        /* Compact Copyright bar */
+        .footer-bottom {
+            text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 15px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="custom-navbar">
+        <div class="logo">
+            <img src="~/Images/Logohome.jpg" alt="Logo" style="height: 40px; border-radius: 50%;">
+        </div>
+
+        <div class="nav-links">
+            <a href="@Url.Action("Index","Home")">Home</a>
+            <a href="@Url.Action("Create","Customer")">Order</a>
+            <a href="@Url.Action("Index","Home")#about-section">About</a>
+            <a href="@Url.Action("Index","Home")#footer">Contact</a>
+            <a href="@Url.Action("Login","Admin")" class="admin-login-btn">
+                Admin Login
+            </a>
+        </div>
+    </nav>
+
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+        window.onload = function () {
+            alert('@TempData["SuccessMessage"]');
+        };
+        </script>
+    }
+
+
+    <!-- ================= ORDER FORM ================= -->
+    <div class="order-container">
+        <div class="text-center mb-5">
+            <h2 style="font-weight: 700; color: #2b4378;">Place Your Order</h2>
+            <p class="text-muted">Fill in the details below to request your aqua feed delivery.</p>
+        </div>
+
+        <div class="order-card border-0 shadow-sm">
+            @using (Html.BeginForm("Create", "Customer", FormMethod.Post))
+            {
+                <div class="row mb-4">
+                    <div class="col-12 border-bottom mb-3 pb-2">
+                        <h5 style="color: #2b4378; font-weight: 600;"><i class="fas fa-user-circle me-2"></i>Personal Details</h5>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold small">Customer Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="fa fa-user text-muted"></i></span>
+                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control border-start-0", placeholder = "Full Name" })
+                            @Html.ValidationMessageFor(m => m.CustomerName, "",new { @class = "text-danger small" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold small">Mobile Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="fa fa-phone text-muted"></i></span>
+                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control border-start-0", maxlength = "10", placeholder = "10-digit number" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label fw-bold small">Delivery Address</label>
+                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", rows = "2", placeholder = "Full delivery address..." })
+                        @Html.ValidationMessageFor(m => m.Address, "",new { @class = "text-danger small" })
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-12 border-bottom mb-3 pb-2">
+                        <h5 style="color: #2b4378; font-weight: 600;"><i class="fas fa-box-open me-2"></i>Order Specification</h5>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold small">Feed Type</label>
+                        @Html.DropDownListFor(m => m.FeedId, ViewBag.FeedList as SelectList, "-- Select Feed Variant --", new { @class = "form-select shadow-sm" })
+                        @Html.ValidationMessageFor(m => m.FeedId, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold small">Assign Seller</label>
+                        @Html.DropDownListFor(m => m.SellerId, ViewBag.SellerList as SelectList, "-- Choose Seller --", new { @class = "form-select shadow-sm" })
+                        @Html.ValidationMessageFor(m => m.SellerId, "",new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold small">Customer Category</label>
+                        @Html.DropDownListFor(m => m.CustomerType, new List<SelectListItem> {
+                            new SelectListItem{Text="Daily Customer", Value="Daily"},
+                            new SelectListItem{Text="New Customer", Value="New"}
+                        }, "-- Select Type --", new { @class = "form-select shadow-sm" })
+                        @Html.ValidationMessageFor(m => m.CustomerType, "",new { @class = "text-danger small" })
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold small">Quantity (Bags)</label>
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", type = "number", min = "1", placeholder = "0" })
+                            <span class="input-group-text">Bags</span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger small" })
+                    </div>
+                </div>
+
+                <div class="text-center pt-3">
+                    <button type="submit" class="btn btn-primary px-5 py-2 shadow" style="background-color: #2b4378; border-radius: 50px; font-weight: 600;">
+                        <i class="fas fa-paper-plane me-2"></i>Confirm and Save Order
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-col footer-logo-col">
+                <img src="~/Images/Logohome.jpg" alt="Logo" class="footer-logo">
+                <h4 style="margin-top:5px;">NAGENDRA Aqua Feeds</h4>
+            </div>
+
+            <div class="footer-col">
+                <h4>Address</h4>
+                <p>Lakshmipuram, Krishna District, India</p>
+                <p>Email: yaswanthguddati@gmail.com</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>📞 +91 93967 64567</p>
+                <p>Facebook</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Yaswanth Guddati © 2026 - All rights reserved
+        </div>
+    </footer>
+
+    @section Scripts{
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</body>
+</html>

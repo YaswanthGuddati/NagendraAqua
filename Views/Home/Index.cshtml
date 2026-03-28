@@ -1,0 +1,442 @@
+﻿@{
+        Layout = null; // Disables the default layout as requested
+    }
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NIT AQUA Foods</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+        <style>
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+
+            /* Navigation & Hero Section (Image 1) */
+            .hero-section {
+                background: linear-gradient(rgba(26, 60, 109, 0.4), rgba(26, 60, 109, 0.4)), url('/Images/HomeBackG.jpg'); /* Replace with your actual path */
+                background-size: cover;
+                background-position: center;
+                height: 500px;
+                color: white;
+                position: relative;
+            }
+
+            .custom-navbar {
+                background-color: #2b4378;
+                padding: 10px 50px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .nav-links a {
+                color: white;
+                text-decoration: none;
+                margin: 0 15px;
+                font-weight: 400;
+            }
+
+            .admin-login-btn {
+                background-color: #ff9800;
+                color: white !important;
+                padding: 8px 20px;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+
+            .hero-text {
+                position: absolute;
+                top: 50%;
+                left: 5%;
+                transform: translateY(-50%);
+                max-width: 500px;
+            }
+
+                .hero-text h1 {
+                    font-size: 3rem;
+                    font-weight: 700;
+                    line-height: 1.1;
+                }
+
+            /* Premium Aqua Feed Section (Image 2) */
+            .product-section {
+                padding: 60px 5%;
+                display: flex;
+                align-items: center;
+                justify-content: center; /* Centers the image and text block together */
+                gap: 60px;
+            }
+
+            .product-images {
+                display: flex;
+                gap: 20px;
+            }
+
+                .product-images img {
+                    width: 350px; /* Increased width to make the combined image prominent */
+                    height: auto;
+                    object-fit: contain;
+                }
+
+            .product-info h2 {
+                color: #1a3c6d;
+                font-weight: 700;
+                font-size: 2.5rem;
+            }
+
+            .feeding-container {
+                display: flex;
+                align-items: center; /* This vertically centers the text relative to the table */
+                justify-content: center; /* This horizontally balances the two columns */
+                gap: 40px;
+                padding: 20px 0;
+            }
+
+            .feeding-text {
+                flex: 1;
+                display: flex;
+                justify-content: center; /* Centers text block horizontally in its column */
+                align-items: center; /* Centers text block vertically in its column */
+            }
+
+                .feeding-text h2 {
+                    color: #182848;
+                    font-size: 28px;
+                    font-weight: bold;
+                    text-align: center; /* Centers the text lines within the H2 */
+                    max-width: 300px;
+                    margin: 0; /* Remove margins to ensure perfect centering */
+                    padding: 0;
+                }
+
+            .feeding-table {
+                flex: 2; /* Keeps the table wider than the text as per your images */
+            }
+
+            .chart-layout {
+                display: flex;
+                gap: 30px;
+                align-items: flex-start;
+            }
+
+            .chart-title {
+                flex: 1;
+                color: #1a3c6d;
+                font-weight: 700;
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .chart-table-container {
+                flex: 2;
+            }
+
+            .chart-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+                .chart-table th {
+                    background-color: #1a3c6d;
+                    color: white;
+                    padding: 12px;
+                    text-align: center;
+                    font-size: 0.9rem;
+                }
+
+                .chart-table td {
+                    border: 1px solid #dee2e6;
+                    padding: 10px;
+                    text-align: center;
+                    color: #1a3c6d;
+                    font-size: 0.85rem;
+                }
+
+                .chart-table tr:nth-child(even) {
+                    background-color: #f8f9fa;
+                }
+
+            /* Footer Refinement */
+            footer {
+                background: linear-gradient(90deg, #0b1d3a, #142850);
+                color: white;
+                /* Reduced top/bottom padding significantly */
+                padding: 20px 0 10px;
+                margin-top: 0;
+                width: 100%;
+            }
+
+            .footer-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start; /* Keeps columns aligned at the top */
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            .footer-col {
+                width: 23%;
+                /* Remove unnecessary padding that pushes height down */
+                padding: 0;
+            }
+
+            /* Make the logo and title tighter */
+            .footer-logo {
+                width: 50px; /* Slightly smaller logo */
+                margin-bottom: 5px;
+                border-radius: 50%;
+                border: 2px solid #ffffff;
+            }
+
+            .footer-col h4 {
+                margin-bottom: 8px; /* Less space under headings */
+                font-size: 14px;
+                text-transform: uppercase;
+            }
+
+            .footer-col p, .footer-col a {
+                margin-bottom: 2px; /* Tighter line spacing for text */
+                font-size: 12px;
+            }
+
+            /* Compact Copyright bar */
+            .footer-bottom {
+                text-align: center;
+                padding: 10px 0;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                margin-top: 15px;
+                font-size: 11px;
+            }
+
+
+            /* ---------- Responsive Design ---------- */
+
+/* Tablets */
+@@media (max-width: 992px) {
+
+    .custom-navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+    }
+
+    .nav-links {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        margin: 5px 10px;
+    }
+
+    .hero-text {
+        max-width: 90%;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .product-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .product-images img {
+        width: 280px;
+    }
+
+    .feeding-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .feeding-text h2 {
+        max-width: 100%;
+    }
+
+    .chart-layout {
+        flex-direction: column;
+    }
+
+    .footer-container {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .footer-col {
+        width: 45%;
+    }
+}
+
+/* Mobile Phones */
+@@media (max-width: 576px) {
+
+    .hero-section {
+        height: 420px;
+    }
+
+    .hero-text {
+        left: 20px;
+        right: 20px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.8rem;
+        line-height: 1.3;
+    }
+
+    .product-images img {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .product-info h2 {
+        font-size: 1.8rem;
+    }
+
+    .feeding-text h2 {
+        font-size: 22px;
+    }
+
+    .chart-table th,
+    .chart-table td {
+        font-size: 0.75rem;
+        padding: 6px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-col {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .footer-logo {
+        margin: auto;
+    }
+}
+
+        </style>
+    </head>
+    <body>
+
+        <div class="hero-section" id="home">
+            <nav class="custom-navbar">
+                <div class="logo">
+                    <img src="~/Images/Logohome.jpg" alt="Logo" style="height: 40px; border-radius: 50%;">
+                </div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="@Url.Action("Create","Customer")">Order</a>
+                    <a href="#about-section">About</a>
+                    <a href="#footer">Contact</a>
+                    <a href="@Url.Action("Login","Admin")" class="admin-login-btn">
+                        Admin Login
+                    </a>
+                </div>
+            </nav>
+            <div class="hero-text">
+                <h1>An unbroken food chain from Nagendra Aqua Foods</h1>
+                <p class="mt-3 fw-bold">HOW WE DO IT</p>
+            </div>
+        </div>
+
+        <div class="product-section" id="about-section">
+            <div class="product-images">
+                <img src="~/Images/FeedImage.jpg" alt="Premium Aqua Feed Bags">
+            </div>
+            <div class="product-info">
+                <h2>Premium Aqua Feed</h2>
+                <p class="text-muted">Our premium quality shrimp feed is specially formulated to enhance growth, improve immunity, and ensure better feed conversion. Manufactured with high-quality ingredients and no antibiotics.</p>
+            </div>
+        </div>
+
+        <div class="feeding-section" id="feeding-chart">
+            <div class="feeding-container">
+
+                <div class="feeding-text">
+                    <h2>Shrimp age and body weight wise feeding chart</h2>
+                </div>
+
+                <div class="feeding-table">
+                    <table class="chart-table">
+                        <thead>
+                            <tr>
+                                <th>Feed Type</th>
+                                <th>Shrimp Weight</th>
+                                <th>Feeding as % of Body Weight</th>
+                                <th>Frequency (time/day)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>starter-1(1)</td><td>0.02-0.4</td><td>10.0-7.0</td><td>2-3 times</td></tr>
+                            <tr><td>starter-2(2c&2p)</td><td>0.4-2.5</td><td>7.0-6.0</td><td>2-3 times</td></tr>
+                            <tr><td>starter-3(3sp)</td><td>2.5-4.5</td><td>6.0-5.5</td><td>3-4 times</td></tr>
+                            <tr><td>pre grower(3m)</td><td>4.5-8.5</td><td>5.5-4.2</td><td>3-4 times</td></tr>
+                            <tr><td>grower-1(3p)</td><td>8.5-13.0</td><td>4.2-3.0</td><td>4-5 times</td></tr>
+                            <tr><td>grower-2(4s)</td><td>13.0-22.0</td><td>3.0-2.2</td><td>4-5 times</td></tr>
+                            <tr><td>grower(4m)</td><td>22.0-30.0</td><td>2.2-1.6</td><td>4-5 times</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <footer id="footer">
+            <div class="footer-container">
+                <div class="footer-col footer-logo-col">
+                    <img src="~/Images/Logohome.jpg" alt="Logo" class="footer-logo">
+                    <h4 style="margin-top:5px;">NAGENDRA Aqua Feeds</h4>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Address</h4>
+                    <p>Lakshmipuram, Krishna District, India</p>
+                    <p>Email: yaswanthguddati@gmail.com</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Links</h4>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#about-section">About Us</a></p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>📞 +91 93967 64567</p>
+                    <p>Facebook</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                Yaswanth Guddati © 2026 - All rights reserved
+            </div>
+        </footer>
+
+
+    </body>
+    </html>
+
+
+
+

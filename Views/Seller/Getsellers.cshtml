@@ -1,0 +1,39 @@
+﻿@model List<NagendraAqua.Models.Seller>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Seller Details";
+}
+
+<h2>Manage Sellers</h2>
+
+<p>
+    <a href="@Url.Action("CreateSeller")" class="btn btn-primary">
+        Add Seller
+    </a>
+</p>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Seller Name</th>
+        <th>Role</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td>@s.SellerId</td>
+            <td>@s.SellerName</td>
+            <td>@s.Role</td>
+            <td>
+                <a href="@Url.Action("Delete", new { id=s.SellerId })"
+                   class="btn btn-danger"
+                   onclick="return confirm('Delete Seller?')">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>
