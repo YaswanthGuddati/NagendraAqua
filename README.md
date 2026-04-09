@@ -115,7 +115,7 @@ FeedManagementSystem/
 1. Clone the repository:
 
 ```
-git clone https://github.com/your-username/FeedManagementSystem.git
+git clone https://github.com/YaswanthGuddati/NagendraAqua.git
 ```
 
 2. Open the solution in Visual Studio
@@ -124,7 +124,7 @@ git clone https://github.com/your-username/FeedManagementSystem.git
 
 ```
 <connectionStrings>
-  <add name="dbcs" connectionString="your_connection_string_here"/>
+  <add name="dbcs" connectionString="Data Source=YASWANTH\SQLEXPRESS;Initial Catalog=NagendraAquaDB;User ID=sa;Password=123;" providerName="System.Data.SqlClient" />
 </connectionStrings>
 ```
 
