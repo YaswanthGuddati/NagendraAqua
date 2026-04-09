@@ -45,7 +45,6 @@
     <table class="table table-bordered table-striped" id="customerTable">
         <thead class="table-dark">
             <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Address</th>
                 <th>Mobile</th>
@@ -62,7 +61,6 @@
             @foreach (System.Data.DataRow row in Model.Rows)
             {
                 <tr>
-                    <td>@row["CustomerId"]</td>
                     <td class="custName">@row["CustomerName"]</td>
                     <td>@row["Address"]</td>
                     <td>@row["Mobile"]</td>
